@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 import uuid
 
+
 class Variation(BaseModel):
     name: str
     ratio: int

@@ -46,8 +46,7 @@ Open a python REPL (e.g. `ipython`, or you can just use `python`):
 ipython
 ```
 
-You will also need to export a username and a password,
-And now you should be able to access all the documents in the database,
+Now you should be able to access all the documents in the database,
 
 ```ipython
 from nexttech.db import Mongo
@@ -55,10 +54,10 @@ from nexttech.db import Mongo
 db = Mongo()
 all_documents = db.all()
 
-all_documents["web_onetrust_enabled"]
+all_documents["some-feature"]
 ```
 
 This should show something like...
 ```python
-Feature({'name': 'web_onetrust_enabled', 'last_editor': 'sami.el.achi@ly.st', ..., 'variations': [], 'history': []}]})
+Feature({'name': 'some-feature', 'last_editor': 'some.one@somewhere.com', ..., 'variations': [], 'history': []}]})
 ```

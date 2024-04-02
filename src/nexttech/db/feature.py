@@ -4,7 +4,6 @@ import time
 from .variation import Variation
 
 
-
 class Feature(BaseModel):
     name: str
     last_editor: str | None

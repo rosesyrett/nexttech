@@ -3,6 +3,7 @@
 import boto3
 from nexttech.settings import TABLE_NAME, DYNAMODB_ENDPOINT_URL
 
+
 class Dynamo:
     def __init__(self):
         self._ddb = boto3.resource("dynamodb", endpoint_url=DYNAMODB_ENDPOINT_URL)

@@ -1,14 +1,14 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from pymongo.cursor import Cursor
 
 from nexttech.settings import Settings, TABLE_NAME
 from nexttech.db.error import DoesNotExist
 from nexttech.db.feature import Feature
 import json
 
-from typing import Dict
+from typing import Dict, Any, Iterable
 import time
+
 
 def clean_timestamp(value, date_format="%Y-%m-%d") -> int | None:
     if not value:
@@ -22,13 +22,25 @@ def clean_timestamp(value, date_format="%Y-%m-%d") -> int | None:
 
     return abs(value)
 
+
 class Mongo:
     def __init__(self):
         settings = Settings()
-        self.client = MongoClient(f"mongodb+srv://{settings.mongo_atlas_username}:{settings.mongo_atlas_password}@testcluster.pixndsa.mongodb.net/?retryWrites=true&w=majority&appName=TestCluster", server_api=ServerApi('1'))
+
+        url = (
+            "mongodb+srv://"
+            f"{settings.mongo_atlas_username}:{settings.mongo_atlas_password}"
+            "@testcluster.pixndsa.mongodb.net/"
+            "?retryWrites=true&w=majority&appName=TestCluster"
+        )
+
+        self.client = MongoClient(
+            url,
+            server_api=ServerApi("1"),
+        )
         self.collection = self.client["next-tech"][TABLE_NAME]
 
-    def _aggregate_features(self, documents: Cursor) -> Dict[str, Feature]:
+    def _aggregate_features(self, documents: Iterable[Any]) -> Dict[str, Feature]:
         features = {}
         last_checked = {}
 
@@ -69,13 +81,13 @@ class Mongo:
         return collapsed_features
 
     def get(self, feature: str) -> Feature:
-        records = self.collection.find({"name":feature})
+        records = self.collection.find({"name": feature})
         features = self._aggregate_features(records)
 
-        if not feature in features:
+        if feature not in features:
             raise DoesNotExist(f"{feature} not found")
         return features[feature]
-        
+
     def all(self) -> Dict[str, Feature]:
         records = self.collection.find()
         return self._aggregate_features(records)
