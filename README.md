@@ -8,7 +8,7 @@ This repository is designed to house the code that will produce leaderboards (ba
 
 #### GitHub Authentication
 
-- [create a GitHub account](https://github.com/signup), // REMOVE THIS and chuck it in the doc because it's a privatae repo, they won't be able to see this README otherwise.
+- [create a GitHub account](https://github.com/signup)
 - [create an ssh key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key) using `ssh-keygen`, and 
 - [connect it to your github account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account#adding-a-new-ssh-key-to-your-account).
 
